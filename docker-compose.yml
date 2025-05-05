@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  cassandra:
+    image: cassandra:3.11
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    networks:
+      - sparkify-net
+    environment:
+      - CASSANDRA_START_RPC=true
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+
+  sparkify-script:
+    build:
+      context: ./app
+    container_name: sparkify-loader
+    depends_on:
+      - cassandra
+    networks:
+      - sparkify-net
+    environment:
+      - CASSANDRA_HOST=cassandra
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: ["python", "sparkify_etl.py"]
+
+volumes:
+  cassandra_data:
+
+networks:
+  sparkify-net:

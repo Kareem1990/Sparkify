@@ -112,6 +112,12 @@ It’s a great demonstration of applied NoSQL design thinking and distributed da
 
 ---
 
+🖥️ Sample Terminal Output
+After running the ETL process, your terminal output should resemble the following, showing successful keyspace creation, query results, and table cleanup:
+
+![Sample Output](images/Screenshot%202025-05-05%20100839.png)
+
+
 ## 🧰 Useful Docker Commands
 
 ```bash
